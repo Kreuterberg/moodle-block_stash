@@ -799,7 +799,7 @@ class manager {
             $this->delete_scarce_item($item, $useritem->get_quantity());
         }
         $useritem->delete();
-        \block_stash\drop_pickup::detele_drop_for_user_item($userid, $itemid, $this->get_stash()->get_id());
+        \block_stash\drop_pickup::delete_drop_for_user_item($userid, $itemid, $this->get_stash()->get_id());
     }
 
     /**

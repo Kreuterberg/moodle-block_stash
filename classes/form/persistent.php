@@ -52,6 +52,27 @@ abstract class persistent extends moodleform {
     private $persistent = null;
 
     /**
+     * Returns true if the class provides the methods this form base requires.
+     *
+     * This allows standalone model classes (not extending block_stash\persistent) to be
+     * used as the persistent class, provided they implement the same public contract.
+     *
+     * Required methods: to_record(), from_record(), get_id(), get_errors(),
+     * get_formatted_properties() (static), properties_definition() (static).
+     *
+     * @param string $classname Fully qualified class name.
+     * @return bool
+     */
+    protected static function is_form_compatible_model(string $classname): bool {
+        return method_exists($classname, 'to_record')
+            && method_exists($classname, 'from_record')
+            && method_exists($classname, 'get_id')
+            && method_exists($classname, 'get_errors')
+            && method_exists($classname, 'get_formatted_properties')
+            && method_exists($classname, 'properties_definition');
+    }
+
+    /**
      * Constructor.
      *
      * The 'persistent' has to be passed as custom data when 'editing'.
@@ -71,7 +92,8 @@ abstract class persistent extends moodleform {
                                 $attributes = null, $editable = true) {
         if (empty(static::$persistentclass)) {
             throw new coding_exception('Static property $persistentclass must be set.');
-        } else if (!is_subclass_of(static::$persistentclass, 'block_stash\\persistent')) {
+        } else if (!is_subclass_of(static::$persistentclass, 'block_stash\\persistent')
+                && !static::is_form_compatible_model(static::$persistentclass)) {
             throw new coding_exception('Static property $persistentclass is not valid.');
         } else if (!array_key_exists('persistent', $customdata)) {
             throw new coding_exception('The custom data \'persistent\' key must be set, even if it is null.');

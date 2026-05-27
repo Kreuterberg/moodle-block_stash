@@ -57,4 +57,80 @@ class tradeitems extends persistent {
             ],
         ];
     }
+
+    /**
+     * Get the trade ID.
+     *
+     * @return int
+     */
+    public function get_tradeid(): int {
+        return $this->get('tradeid');
+    }
+
+    /**
+     * Set the trade ID.
+     *
+     * @param int $tradeid
+     * @return static
+     */
+    public function set_tradeid(int $tradeid): static {
+        return $this->set('tradeid', $tradeid);
+    }
+
+    /**
+     * Get the item ID.
+     *
+     * @return int
+     */
+    public function get_itemid(): int {
+        return $this->get('itemid');
+    }
+
+    /**
+     * Set the item ID.
+     *
+     * @param int $itemid
+     * @return static
+     */
+    public function set_itemid(int $itemid): static {
+        return $this->set('itemid', $itemid);
+    }
+
+    /**
+     * Get the quantity.
+     *
+     * @return int|null
+     */
+    public function get_quantity(): ?int {
+        return $this->get('quantity');
+    }
+
+    /**
+     * Set the quantity.
+     *
+     * @param int|null $quantity
+     * @return static
+     */
+    public function set_quantity(?int $quantity): static {
+        return $this->set('quantity', $quantity);
+    }
+
+    /**
+     * Get the gain/loss direction (true = gain, false = loss).
+     *
+     * @return bool
+     */
+    public function get_gainloss(): bool {
+        return (bool) $this->get('gainloss');
+    }
+
+    /**
+     * Set the gain/loss direction.
+     *
+     * @param bool $gainloss
+     * @return static
+     */
+    public function set_gainloss(bool $gainloss): static {
+        return $this->set('gainloss', $gainloss);
+    }
 }

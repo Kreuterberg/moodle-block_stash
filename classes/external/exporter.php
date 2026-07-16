@@ -163,17 +163,17 @@ abstract class exporter {
                     throw new coding_exception('Unexpected property ' . $propertyformat);
                 }
                 $format = $record->$propertyformat;
-                list($text, $format) = external_format_text($data->$property, $format, $context->id, 'block_stash', '', 0);
+                list($text, $format) = \core_external\util::format_text($data->$property, $format, $context, 'block_stash', '', 0);
                 $data->$property = $text;
                 $data->$propertyformat = $format;
 
             } else if ($definition['type'] === PARAM_TEXT) {
                 if (!empty($definition['multiple'])) {
                     foreach ($data->$property as $key => $value) {
-                        $data->{$property}[$key] = external_format_string($value, $context->id);
+                        $data->{$property}[$key] = \core_external\util::format_string($value, $context);
                     }
                 } else {
-                    $data->$property = external_format_string($data->$property, $context->id);
+                    $data->$property = \core_external\util::format_string($data->$property, $context);
                 }
             }
         }

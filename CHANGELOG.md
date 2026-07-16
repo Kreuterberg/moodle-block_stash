@@ -1,11 +1,13 @@
 Block Stash
 ===========
 
-Version 2.2.2 (TBD)
+Version 2.2.2 (8th June 2026)
 -------------------
 
 * Tidied up some of the JavaScript to use modern classes. Removed some jquery where found.
 * Updated the JavaScript modals as the old ones were deprecated.
+* Removed the persistance class.
+* Updated the deprecated external text and strings.
 
 Version 2.2.1 (8th October 2025)
 -------------------
